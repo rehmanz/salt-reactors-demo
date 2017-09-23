@@ -2,7 +2,7 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  os = "bento/ubuntu-16.04"
+  os = "ubuntu/xenial64"
 
   ##
   # Network Setup
