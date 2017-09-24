@@ -25,6 +25,6 @@ pillar_roots:
 ##
 reactor:
   - 'salt/demo/minion1/full_logs':
-    - /srv/salt/formulas/reactor/cleanup_logs.sls
+    - salt://reactor/cleanup_logs.sls
   - 'salt/demo/minion1/restart/ssh':
-    - /srv/salt/formulas/reactor/restart_ssh_service.sls
+    - salt://reactor/restart_ssh_service.sls

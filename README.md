@@ -54,13 +54,13 @@ Internal reactors are automatically triggered by Salt. Let's explore the structu
     ```yml
     reactor:
       - 'salt/demo/minion1/full_logs':
-        - /srv/salt/formulas/reactor/cleanup_logs.sls
+        - salt://reactor/cleanup_logs.sls
       - 'salt/demo/minion1/restart/ssh':
-        - /srv/salt/formulas/reactor/restart_ssh_service.sls
+        - salt://reactor/restart_ssh_service.sls
     ```
-    The above example shows `salt/demo/minion/full_logs` tag. It automatically triggers the `cleanup_logs.sls` formula.
+    The above example shows `salt/demo/minion/full_logs`, which triggers the `cleanup_logs.sls` formula.
     
-    The cleanup formula looks simply removed the log file.
+    The cleanup formula simply removes the log file.
     ```yml
     cleanup log files:
       local.cmd.run:
