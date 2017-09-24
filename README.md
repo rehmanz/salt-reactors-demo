@@ -1,29 +1,27 @@
 # Salt Stack Reactors 
 Salt Stack's Reactor system provides the ability to trigger actions in response to events. This tutorial sets up a vagrant box and give a brief overview on reactors.
 
-## Installing Vagrant & Virtual Box 
+## Project Setup
 1. Download & install [Vagrant](https://www.vagrantup.com/downloads.html) `2.0.0` and [VirtualBox](https://www.virtualbox.org/wiki/Downloads) `5.0.0` or above
 2. Ensure vagrant-salt plugin is not installed
    ```shell
    vagrant plugin uninstall vagrant-salt
    ```
 
-
-## Project Setup
-1. Create a workspace & clone salt-reactors-demo repo
+3. Create a workspace and clone salt-reactors-demo repo
    ```shell
    mkdir ~/saltspace && cd ~/saltspace
    git clone git@github.com:rehmanz/salt-reactors-demo.git
    export WORKSPACE=~/saltspace/salt-reactors-demo/
    ```
 
-2. Use vagrant to create and provision Salt master and two minions
+4. Use vagrant to create and provision Salt master and two minions
    ```shell
    cd ${WORKSPACE}
    vagrant up --provider virtualbox
    ```
 
-3. Validate provisioning via the ping test from Salt master
+5. Validate provisioning via the ping test from Salt master
    ```shell
    vagrant ssh master
    sudo salt '*' test.ping
