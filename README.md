@@ -50,7 +50,7 @@ Internal reactors are automatically triggered by Salt. Let's explore the structu
     vagrant ssh master
     ```
 
-2. Salt Reactors allows you to define a specific event tag and associated reaction(s). This can be seen in Salt master `/etc/salt/master` config file.
+2. Salt Reactors allows you to define a specific events tag and associated reaction(s). This can be seen in Salt master `/etc/salt/master` config file.
     ```yml
     reactor:
       - 'salt/demo/minion1/full_logs':
@@ -58,7 +58,7 @@ Internal reactors are automatically triggered by Salt. Let's explore the structu
       - 'salt/demo/minion1/restart/ssh':
         - salt://reactor/restart_ssh_service.sls
     ```
-    The above example shows `salt/demo/minion/full_logs`, which triggers the `cleanup_logs.sls` formula.
+    The above example shows `salt/demo/minion/full_logs` tag, which triggers the `cleanup_logs.sls` formula.
     
     The cleanup formula simply removes the log file.
     ```yml
@@ -89,4 +89,35 @@ Let's see the internal reactors in action.
    You will notice `/tmp/log.txt` file was removed due to `salt/demo/minion/full_logs` event sent to Salt master by `minion1`.
 
 4. You can go back to the Salt master window and view the event output and reaction.
+   ```yml
+    # This is the event triggered by minion1
+    salt/demo/minion1/full_logs	{
+        "_stamp": "2017-09-24T23:30:37.659325", 
+        "cmd": "_minion_event", 
+        "data": {
+            "__pub_fun": "event.send", 
+            "__pub_jid": "20170924233038250552", 
+            "__pub_pid": 16518, 
+            "__pub_tgt": "salt-call"
+        }, 
+        "id": "minion1", 
+        "tag": "salt/demo/minion1/full_logs"
+    }
+    
+    
+    # Salt Reactor ran this formula on minion1    
+    salt/job/20170924233037754615/ret/minion1	{
+        "_stamp": "2017-09-24T23:30:37.794277", 
+        "cmd": "_return", 
+        "fun": "cmd.run", 
+        "fun_args": [
+            "rm /tmp/log.txt"
+        ], 
+        "id": "minion1", 
+        "jid": "20170924233037754615", 
+        "retcode": 0, 
+        "return": "", 
+        "success": true
+    }
+   ```
 
