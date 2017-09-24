@@ -40,7 +40,7 @@ Salt Stack's Reactor system provides the ability to trigger actions in response 
 
 Salt Stack has internal and external reactors.
  
-#### Internal Reactors
+### Internal Reactors
 
 Internal reactors are automatically triggered by Salt. Let's explore the structure.
 
@@ -105,7 +105,7 @@ Let's see the internal reactors in action.
     }
     
     
-    # Salt Reactor ran this formula on minion1    
+    # Salt Reactor ran this formula due to the event above    
     salt/job/20170924233037754615/ret/minion1	{
         "_stamp": "2017-09-24T23:30:37.794277", 
         "cmd": "_return", 
