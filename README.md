@@ -54,13 +54,11 @@ Internal reactors are automatically triggered by Salt. Let's explore the structu
 
 2. Salt Reactors allows you to define a specific event tag and associated reaction(s). This can be seen in Salt master `/etc/salt/master` config file.
     ```yml
-    ...
-    
     reactor:
       - 'salt/demo/minion1/full_logs':
         - salt://reactor/cleanup_logs.sls
       - 'salt/demo/minion1/restart/ssh':
-        - salt://reactor/restart_ssh_service.sls  
+        - salt://reactor/restart_ssh_service.sls
     ```
     The above example shows `salt/demo/minion/full_logs` tag. It automatically triggers the `cleanup_logs.sls` formula.
     
