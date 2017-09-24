@@ -1,0 +1,30 @@
+##
+# Security Settings
+##
+auto_accept: True
+
+
+##
+# File Server Settings
+##
+file_roots:
+  base:
+    - /srv/salt/formulas/base
+
+
+##
+# Pillar Settings
+##
+pillar_roots:
+  base:
+    - /srv/salt/pillar/base
+
+
+##
+# Reactor Settings
+##
+reactor:
+  - 'salt/demo/minion1/full_logs':
+    - salt://reactor/cleanup_logs.sls
+  - 'salt/demo/minion1/restart/ssh':
+    - salt://reactor/restart_ssh_service.sls

@@ -1,6 +1,3 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
 Vagrant.configure("2") do |config|
   os = "ubuntu/xenial64"
 
@@ -21,28 +18,30 @@ Vagrant.configure("2") do |config|
       master_config.vm.box = "#{os}"
       master_config.vm.host_name = 'saltmaster.local'
       master_config.vm.network "private_network", ip: "#{net_ip}.10"
-      master_config.vm.synced_folder "saltstack/salt/", "/srv/salt"
-      master_config.vm.synced_folder "saltstack/pillar/", "/srv/pillar"
+      master_config.vm.synced_folder "salt/formulas/", "/srv/salt/formulas/"
+      master_config.vm.synced_folder "salt/pillar/", "/srv/salt/pillar/"
 
       master_config.vm.provision :salt do |salt|
-        salt.master_config = "saltstack/etc/master"
-        salt.master_key = "saltstack/keys/master_minion.pem"
-        salt.master_pub = "saltstack/keys/master_minion.pub"
-        salt.minion_key = "saltstack/keys/master_minion.pem"
-        salt.minion_pub = "saltstack/keys/master_minion.pub"
+        salt.master_config = "salt/etc/master"
+        salt.master_key = "salt/keys/master_minion.pem"
+        salt.master_pub = "salt/keys/master_minion.pub"
+        salt.minion_key = "salt/keys/master_minion.pem"
+        salt.minion_pub = "salt/keys/master_minion.pub"
         salt.seed_master = {
-                            "minion1" => "saltstack/keys/minion1.pub",
-                            "minion2" => "saltstack/keys/minion2.pub"
+                            "minion1" => "salt/keys/minion1.pub",
+                            "minion2" => "salt/keys/minion2.pub"
                            }
 
         salt.install_type = "stable"
         salt.install_master = true
+        salt.run_highstate = true
         salt.no_minion = true
         salt.verbose = true
         salt.colorize = true
         salt.bootstrap_options = "-P -c /tmp"
         salt.install_type = :stable
       end
+
     end
 
 
@@ -60,11 +59,13 @@ Vagrant.configure("2") do |config|
         minion_config.vm.hostname = "#{vmname}"
         minion_config.vm.network "private_network", ip: "#{ip}"
 
+
         minion_config.vm.provision :salt do |salt|
-          salt.minion_config = "saltstack/etc/#{vmname}"
-          salt.minion_key = "saltstack/keys/#{vmname}.pem"
-          salt.minion_pub = "saltstack/keys/#{vmname}.pub"
+          salt.minion_config = "salt/etc/#{vmname}"
+          salt.minion_key = "salt/keys/#{vmname}.pem"
+          salt.minion_pub = "salt/keys/#{vmname}.pub"
           salt.install_type = "stable"
+          salt.run_highstate = true
           salt.verbose = true
           salt.colorize = true
           salt.bootstrap_options = "-P -c /tmp"

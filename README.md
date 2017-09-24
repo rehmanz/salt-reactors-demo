@@ -1,2 +1,1 @@
-# salt-reactors-demo
-Salt Stack Reactors
+# Salt Reactors Demo
