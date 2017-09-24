@@ -4,7 +4,7 @@ Salt Stack reactors demo
 ## Installing Vagrant & Virtual Box 
 1. Download & install [Vagrant](https://www.vagrantup.com/downloads.html) `2.0.0` and [VirtualBox](https://www.virtualbox.org/wiki/Downloads) `5.0.0` or above
 2. Ensure vagrant-salt plugin is not installed
-   ```
+   ```shell
    vagrant plugin uninstall vagrant-salt
    ```
 
@@ -18,19 +18,19 @@ Salt Stack reactors demo
    ```
 
 2. Use vagrant to create and provision Salt master and two minions
-   ```
+   ```shell
    cd ${WORKSPACE}
    vagrant up --provider virtualbox
    ```
 
 3. Validate provisioning via the ping test from Salt master
-   ```
+   ```shell
    vagrant ssh master
    sudo salt '*' test.ping
    ```
    
    You should see the following output.
-   ```
+   ```yml
    minion2:
     True
    minion1:
@@ -47,7 +47,7 @@ Salt Stack has internal and external reactors.
 Internal reactors are automatically triggered by Salt. Let's explore the structure.
 
 1. Login into salt master to explore.
-    ```
+    ```shell
     cd ${WORKSPACE}
     vagrant ssh master
     ```
@@ -63,7 +63,7 @@ Internal reactors are automatically triggered by Salt. Let's explore the structu
     The above example shows `salt/demo/minion/full_logs` tag. It automatically triggers the `cleanup_logs.sls` formula.
     
     The cleanup formula looks simply removed the log file.
-    ```
+    ```yml
     cleanup log files:
       local.cmd.run:
         - tgt: 'minion1'
@@ -78,13 +78,13 @@ Let's see the internal reactors in action.
    sudo salt-run state.event pretty=True
    ```
 2. In a new shell, login to `minion1`
-   ```
+   ```shell
    cd ${WORKSPACE}
    vagrant ssh minion1
    ```
    
 3. Create a log file on `minion1` and manually trigger the event.
-   ```
+   ```shell
    echo "This is a test" > /tmp/log.txt
    sudo salt-call event.send 'salt/demo/minion1/full_logs'
    ```
