@@ -11,7 +11,7 @@ Salt Stack reactors demo
 
 ## Project Setup
 1. Create a workspace & clone salt-reactors-demo repo
-   ```
+   ```shell
    mkdir ~/saltspace && cd ~/saltspace
    git clone git@github.com:rehmanz/salt-reactors-demo.git
    export WORKSPACE=~/saltspace/salt-reactors-demo/
@@ -53,7 +53,7 @@ Internal reactors are automatically triggered by Salt. Let's explore the structu
     ```
 
 2. Salt Reactors allows you to define a specific event tag and associated reaction(s). This can be seen in Salt master `/etc/salt/master` config file.
-    ```
+    ```yaml
     ...
     
     reactor:
