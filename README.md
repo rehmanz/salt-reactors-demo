@@ -5,29 +5,32 @@ Salt Stack reactors demo
 1. Download & install [Vagrant](https://www.vagrantup.com/downloads.html) `2.0.0` and [VirtualBox](https://www.virtualbox.org/wiki/Downloads) `5.0.0` or above
 2. Ensure vagrant-salt plugin is not installed
    ```
-   $ vagrant plugin uninstall vagrant-salt
+   vagrant plugin uninstall vagrant-salt
    ```
 
 
 ## Project Setup
 1. Create a workspace & clone salt-reactors-demo repo
    ```
-   $ mkdir ~/saltspace && cd ~/saltspace
-   $ git clone git@github.com:rehmanz/salt-reactors-demo.git
-   $ export WORKSPACE="~/saltspace/salt-reactors-demo"
+   mkdir ~/saltspace && cd ~/saltspace
+   git clone git@github.com:rehmanz/salt-reactors-demo.git
+   export WORKSPACE="~/saltspace/salt-reactors-demo"
    ```
 
 2. Use vagrant to create and provision Salt master and two minions
    ```
-   $ cd ${WORKSPACE}
-   $ vagrant up --provider virtualbox
+   cd ${WORKSPACE}
+   vagrant up --provider virtualbox
    ```
 
 3. Validate provisioning via the ping test from Salt master
    ```
-   $ vagrant ssh master
-   $ sudo salt '*' test.ping
+   vagrant ssh master
+   sudo salt '*' test.ping
+   ```
    
+   You should see the following output.
+   ```
    minion2:
     True
    minion1:
@@ -45,8 +48,8 @@ Internal reactors are automatically triggered by Salt. Let's explore the structu
 
 1. Login into salt master to explore.
     ```
-    $ cd ${WORKSPACE}
-    $ vagrant ssh master
+    cd ${WORKSPACE}
+    vagrant ssh master
     ```
 
 2. Salt Reactors allows you to define a specific event tag and associated reaction(s). This can be seen in Salt master `/etc/salt/master` config file.
@@ -74,18 +77,18 @@ Internal reactors are automatically triggered by Salt. Let's explore the structu
 Let's see the internal reactors in action.
 1. Start monitoring events on Salt master
    ```
-   $ sudo salt-run state.event pretty=True
+   sudo salt-run state.event pretty=True
    ```
 2. In a new shell, login to `minion1`
    ```
-   $ cd ${WORKSPACE}
-   $ vagrant ssh minion1
+   cd ${WORKSPACE}
+   vagrant ssh minion1
    ```
    
 3. Create a log file on `minion1` and manually trigger the event.
    ```
-   $ echo "This is a test" > /tmp/log.txt
-   $ sudo salt-call event.send 'salt/demo/minion1/full_logs'
+   echo "This is a test" > /tmp/log.txt
+   sudo salt-call event.send 'salt/demo/minion1/full_logs'
    ```
    You will notice `/tmp/log.txt` file was removed due to `salt/demo/minion/full_logs` event sent to Salt master by `minion1`.
 
