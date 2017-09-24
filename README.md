@@ -14,7 +14,7 @@ Salt Stack reactors demo
    ```
    mkdir ~/saltspace && cd ~/saltspace
    git clone git@github.com:rehmanz/salt-reactors-demo.git
-   export WORKSPACE="~/saltspace/salt-reactors-demo"
+   export WORKSPACE=~/saltspace/salt-reactors-demo/
    ```
 
 2. Use vagrant to create and provision Salt master and two minions
