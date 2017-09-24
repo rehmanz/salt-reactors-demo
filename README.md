@@ -4,18 +4,18 @@ Salt Stack reactors demo
 ## Installing Vagrant & Virtual Box 
 1. Download & install [Vagrant](https://www.vagrantup.com/downloads.html) `2.0.0` and [VirtualBox](https://www.virtualbox.org/wiki/Downloads) `5.0.0` or above
 2. Ensure vagrant-salt plugin is not installed
-  ```
-  $ vagrant plugin uninstall vagrant-salt
-  ```
+   ```
+   $ vagrant plugin uninstall vagrant-salt
+   ```
 
 
 ## Project Setup
 1. Create a workspace & clone salt-reactors-demo repo
-  ```
-  $ mkdir ~/saltspace && cd ~/saltspace
-  $ git clone git@github.com:rehmanz/salt-reactors-demo.git
-  $ export WORKSPACE="~/saltspace/salt-reactors-demo"
-  ```
+   ```
+   $ mkdir ~/saltspace && cd ~/saltspace
+   $ git clone git@github.com:rehmanz/salt-reactors-demo.git
+   $ export WORKSPACE="~/saltspace/salt-reactors-demo"
+   ```
 
 2. Use vagrant to create and provision Salt master and two minions
    ```
