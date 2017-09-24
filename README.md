@@ -53,7 +53,7 @@ Internal reactors are automatically triggered by Salt. Let's explore the structu
     ```
 
 2. Salt Reactors allows you to define a specific event tag and associated reaction(s). This can be seen in Salt master `/etc/salt/master` config file.
-    ```yaml
+    ```yml
     ...
     
     reactor:
