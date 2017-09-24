@@ -41,15 +41,15 @@ Salt Stack has internal and external reactors.
  
 #### Internal Reactors
 
-Salt Reactors allows you to define a specific tag and associate to a specific set of action. 
+Internal reactors are automatically triggered by Salt. Let's explore the structure.
 
-1. Let's login into salt master to explore.
+1. Login into salt master to explore.
     ```
     $ cd ${WORKSPACE}
     $ vagrant ssh master
     ```
 
-2. Reactor configuration files can be view via `sudo vi /etc/salt/master` command.
+2. Salt Reactors allows you to define a specific event tag and associated reaction(s). This can be seen in Salt master `/etc/salt/master` config file.
     ```
     ...
     
@@ -59,7 +59,7 @@ Salt Reactors allows you to define a specific tag and associate to a specific se
       - 'salt/demo/minion1/restart/ssh':
         - salt://reactor/restart_ssh_service.sls  
     ```
-    Salt Reactors allows you to define a specific event tag and associated reaction(s). For example, when `salt/demo/minion/full_logs` event is received, we trigger the `cleanup_logs.sls` formula.
+    The above example shows `salt/demo/minion/full_logs` tag. It automatically triggers the `cleanup_logs.sls` formula.
     
     The cleanup formula looks simply removed the log file.
     ```
@@ -69,4 +69,25 @@ Salt Reactors allows you to define a specific tag and associate to a specific se
         - arg:
           - rm /tmp/log.txt
     ```
-3. 
+
+
+Let's see the internal reactors in action.
+1. Start monitoring events on Salt master
+   ```
+   $ sudo salt-run state.event pretty=True
+   ```
+2. In a new shell, login to `minion1`
+   ```
+   $ cd ${WORKSPACE}
+   $ vagrant ssh minion1
+   ```
+   
+3. Create a log file on `minion1` and manually trigger the event.
+   ```
+   $ echo "This is a test" > /tmp/log.txt
+   $ sudo salt-call event.send 'salt/demo/minion1/full_logs'
+   ```
+   You will notice `/tmp/log.txt` file was removed due to `salt/demo/minion/full_logs` event sent to Salt master by `minion1`.
+
+4. You can go back to the Salt master window and view the event output and reaction.
+
