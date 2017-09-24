@@ -1,4 +1,5 @@
-restart_ssh_service:
+cleanup log files:
   local.cmd.run:
-    - args:
-      - service ssh restart
+    - tgt: 'minion1'
+    - arg:
+      - rm /tmp/log.txt

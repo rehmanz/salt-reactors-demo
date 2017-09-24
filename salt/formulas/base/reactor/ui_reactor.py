@@ -1,4 +1,5 @@
-# /srv/salt/reactor/ui_reactor.py
+#!/usr/bin/env python
+
 import os
 import time
 import logging
@@ -23,8 +24,9 @@ def get_event_payload(tag_id):
 def process_events():
     while True:
         if not q.empty():
-            LOGGER.debug("Waiting 60 seconds for all events to be registered")
-            time.sleep(60)
+            LOGGER.debug("#TODO: Implement correlation logic")
+            LOGGER.debug("Waiting 20 seconds for all events to be registered")
+            time.sleep(20)
 
             LOGGER.debug("Fetching all events from the event queue")
             while not q.empty():
@@ -34,14 +36,14 @@ def process_events():
             timeout = time.time() + MAX_TIMEOUT_VALUE
             while time.time() < timeout:
                 try:
-                    LOGGER.debug("Implement complex reaction here")
+                    LOGGER.debug("#TODO: Implement complex reaction")
 
                 except Exception as e:
                     LOGGER.error("Failed to complete the reaction: %s" %(e))
                     # Send failure notification
                 break
 
-            LOGGER.debug("Implement notification summary")
+            LOGGER.debug("#TODO: Implement validation & notification")
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
