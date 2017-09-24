@@ -122,6 +122,8 @@ Let's see the internal reactors in action.
    ```
 
 
+
+
 ### External Reactors
 
 External reactors are custom scripts (i.e. Bash, Python, Golang) that listen for specific tags from Salt event bus.
@@ -212,3 +214,33 @@ External reactors are custom scripts (i.e. Bash, Python, Golang) that listen for
             q.put(event_payload)
             LOGGER.info("Received an event=%s" %event_payload)
    ```
+
+3. Now start the reactor process and monitor the log file for activity.
+   ```shell
+   sudo /srv/salt/formulas/base/reactor/ui_reactor.py demo &
+   sudo tail -f /var/log/demo.log
+   ```
+   
+4. In new shells, login to `minion1` and `minion2`.
+    ```shell
+    vagrant ssh minion1
+    ```
+    
+    ```shell
+    vagrant ssh minion2
+    ```
+    
+5. Now trigger the dead event both minions while monitoring log file activity on Salt Master.
+
+   On `minion1` execute.
+   ```shell
+   sudo salt-call event.send 'salt/demo/ui/slave/dead' '{ 'record': { 'environment' : 'demo', 'node_type' : 'ui',  'node_id' : 'minion1' } }'
+   ```
+   
+   On `minion2` execute.
+   ```shell
+   sudo salt-call event.send 'salt/demo/ui/slave/dead' '{ 'record': { 'environment' : 'demo', 'node_type' : 'ui',  'node_id' : 'minion2' } }'
+   ```
+   
+   You will notice our reactor waited for both the events to be registered, before invoking the recovery logic.
+   
