@@ -50,7 +50,7 @@ Internal reactors are automatically triggered by Salt. Let's explore the structu
     vagrant ssh master
     ```
 
-2. Salt Reactors allow you to define a specific event tags and associated reaction. This can be seen in Salt master `/etc/salt/master` config file under `reactor` section.
+2. Salt reactors allow you to define specific event tags and associated them with one or more reactions. This can be seen in Salt master `/etc/salt/master` config file under `reactor` section.
     ```yml
     reactor:
       - 'salt/demo/minion1/full_logs':
