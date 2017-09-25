@@ -15,7 +15,7 @@ Salt Stack's Reactor system provides the ability to trigger actions in response 
    export WORKSPACE=~/saltspace/salt-reactors-demo/
    ```
 
-4. Use vagrant to create and provision Salt master and two minions.
+4. Use Vagrant to create and provision Salt master and two minions.
    ```shell
    cd ${WORKSPACE}
    vagrant up --provider virtualbox
@@ -44,7 +44,7 @@ Salt Stack has internal and external reactors.
 
 Internal reactors are automatically triggered by Salt. Let's explore the structure.
 
-1. Login into salt master to explore.
+1. Login into Salt master to explore.
     ```shell
     cd ${WORKSPACE}
     vagrant ssh master
@@ -60,7 +60,7 @@ Internal reactors are automatically triggered by Salt. Let's explore the structu
     ```
     The above example shows `salt/demo/minion/full_logs` tag, which triggers the `cleanup_logs.sls` formula.
     
-    The cleanup formula simply removes the log file.
+    The `cleanup_logs.sls` formula simply removes the log file.
     ```yml
     cleanup log files:
       local.cmd.run:
