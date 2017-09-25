@@ -223,14 +223,16 @@ External reactors are custom scripts (i.e. Bash, Python, Golang) that listen for
    
 4. In new shells, login to `minion1` and `minion2`.
     ```shell
+    cd ${WORKSPACE}
     vagrant ssh minion1
     ```
     
     ```shell
+    cd ${WORKSPACE}
     vagrant ssh minion2
     ```
     
-5. Now trigger the dead event both minions while monitoring log file activity on Salt Master.
+5. Now trigger the dead event from both minions while monitoring log file activity on Salt Master.
 
    On `minion1` execute.
    ```shell
