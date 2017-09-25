@@ -1,7 +1,7 @@
 # Salt Stack Reactors 
 Salt Stack's Reactor system provides the ability to trigger actions in response to events. This tutorial sets up a vagrant box and gives you a brief overview on reactors.
 
-## Project Setup
+## Setup
 1. Download & install [Vagrant](https://www.vagrantup.com/downloads.html) `2.0.0` and [VirtualBox](https://www.virtualbox.org/wiki/Downloads) `5.0.0` or above.
 2. Ensure vagrant-salt plugin is not installed as it may cause issues.
    ```shell
