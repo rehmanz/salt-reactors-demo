@@ -1,21 +1,21 @@
 # Salt Stack Reactors 
-Salt Stack's Reactor system provides the ability to trigger actions in response to events. This tutorial sets up a vagrant box and give a brief overview on reactors.
+Salt Stack's Reactor system provides the ability to trigger actions in response to events. This tutorial sets up a vagrant box and gives you a brief overview on reactors.
 
 ## Project Setup
-1. Download & install [Vagrant](https://www.vagrantup.com/downloads.html) `2.0.0` and [VirtualBox](https://www.virtualbox.org/wiki/Downloads) `5.0.0` or above
-2. Ensure vagrant-salt plugin is not installed
+1. Download & install [Vagrant](https://www.vagrantup.com/downloads.html) `2.0.0` and [VirtualBox](https://www.virtualbox.org/wiki/Downloads) `5.0.0` or above.
+2. Ensure vagrant-salt plugin is not installed as it may cause issues.
    ```shell
    vagrant plugin uninstall vagrant-salt
    ```
 
-3. Create a workspace and clone salt-reactors-demo repo
+3. Create a workspace and clone `salt-reactors-demo` repository.
    ```shell
    mkdir ~/saltspace && cd ~/saltspace
    git clone git@github.com:rehmanz/salt-reactors-demo.git
    export WORKSPACE=~/saltspace/salt-reactors-demo/
    ```
 
-4. Use vagrant to create and provision Salt master and two minions
+4. Use vagrant to create and provision Salt master and two minions.
    ```shell
    cd ${WORKSPACE}
    vagrant up --provider virtualbox
@@ -50,7 +50,7 @@ Internal reactors are automatically triggered by Salt. Let's explore the structu
     vagrant ssh master
     ```
 
-2. Salt Reactors allows you to define a specific events tag and associated reaction(s). This can be seen in Salt master `/etc/salt/master` config file.
+2. Salt Reactors allow you to define a specific event tags and associated reaction. This can be seen in Salt master `/etc/salt/master` config file under `reactor` section.
     ```yml
     reactor:
       - 'salt/demo/minion1/full_logs':
@@ -243,4 +243,5 @@ External reactors are custom scripts (i.e. Bash, Python, Golang) that listen for
    ```
    
    You will notice our reactor waited for both the events to be registered, before invoking the recovery logic.
+   To learn more about reactors, Salt Stack [Reactor System](https://docs.saltstack.com/en/latest/topics/reactor/) is a great resource!
    
